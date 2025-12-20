@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import css from './Header.module.css';
 import { ALL_TAG } from '@/lib/config/constants';
+import AuthNavigation from '../AuthNavigation/AuthNavigation';
 
 function Header() {
   return (
@@ -16,6 +17,7 @@ function Header() {
           <li>
             <Link href={`/notes/filter/${ALL_TAG}`}>Notes</Link>
           </li>
+          <AuthNavigation />
         </ul>
       </nav>
     </header>
