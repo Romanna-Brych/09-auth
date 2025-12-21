@@ -5,7 +5,7 @@
 // getMe;
 // updateMe;
 import { User } from '@/types/user';
-import type { FetchNotesResponse, NewNote, Note, RegisterRequest } from '../../types/note';
+import type { FetchNotesResponse, NewNote, Note } from '../../types/note';
 import { nextServer } from './api';
 
 export async function fetchNotes(
@@ -39,7 +39,17 @@ export async function fetchNoteById(id: string): Promise<Note> {
   return data;
 }
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+}
+
 export async function register(userData: RegisterRequest): Promise<User> {
   const { data } = await nextServer.post<User>('/auth/register', userData);
+  return data;
+}
+
+export async function login(userData: RegisterRequest): Promise<User> {
+  const { data } = await nextServer.post<User>('/auth/login', userData);
   return data;
 }

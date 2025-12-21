@@ -19,8 +19,3 @@ export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
 }
-
-export interface RegisterRequest {
-  email: string;
-  password: string;
-}

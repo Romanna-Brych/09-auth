@@ -4,7 +4,8 @@ import css from './SignUpPage.module.css';
 import { useMutation } from '@tanstack/react-query';
 import { register } from '@/lib/api/clientApi';
 import { useState } from 'react';
-import { RegisterRequest } from '@/types/note';
+import { RegisterRequest } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
 
 //test123456@example.co
 //StrongPass123
@@ -12,11 +13,12 @@ import { RegisterRequest } from '@/types/note';
 function SignUp() {
   // const router = useRouter();
   const [error, setError] = useState('');
+  const setUser = useAuthStore(state => state.setUser);
 
   const { mutate, isPending } = useMutation({
     mutationFn: register,
     // onSuccess: () => router.push('/profile'),
-    onError: () => setError('Oops... some error'),
+    onError: () => setError('User already exists or invalid data'),
   });
 
   const handleSubmit = (formData: FormData) => {
@@ -64,7 +66,7 @@ function SignUp() {
           </button>
         </div>
 
-        <p className={css.error}>Error</p>
+        {error && <p className={css.error}>{error}</p>}
       </form>
     </main>
   );
