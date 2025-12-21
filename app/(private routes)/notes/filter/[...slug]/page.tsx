@@ -1,4 +1,3 @@
-import { fetchNotes } from '@/lib/api';
 import {
   dehydrate,
   HydrationBoundary,
@@ -7,6 +6,7 @@ import {
 import NotesClient from './Notes.client';
 import { Metadata } from 'next';
 import { ALL_TAG, BASE_URL } from '@/lib/config/constants';
+import { fetchNotesServer } from '@/lib/api/serverApi';
 
 interface Props {
   params: Promise<{ slug: string[] }>;
@@ -44,7 +44,7 @@ const NotesByCategory = async ({ params }: Props) => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['notes', { page: 1, tag }],
-    queryFn: () => fetchNotes('', 1, tag),
+    queryFn: () => fetchNotesServer('', 1, tag),
   });
 
   return (
