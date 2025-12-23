@@ -30,7 +30,6 @@ const NoteFormSchema = Yup.object().shape({
 
 function NoteForm() {
   const router = useRouter();
-  const queryClient = useQueryClient();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
 
@@ -52,10 +51,15 @@ function NoteForm() {
     }
   };
 
+  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
       clearDraft();
+      queryClient.invalidateQueries({
+        queryKey: ['notes'],
+      });
       router.push(`/notes/filter/${ALL_TAG}`);
     },
   });
