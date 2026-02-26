@@ -55,7 +55,7 @@ export async function login(userData: RegisterRequest): Promise<User> {
 // }
 
 export async function checkSession(): Promise<boolean> {
-  const res = await nextServer.get<CheckSessionRequest>('/auth/refresh');
+  const res = await nextServer.post<CheckSessionRequest>('/auth/refresh');
   return res.data.success;
 }
 

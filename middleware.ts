@@ -37,29 +37,25 @@ export async function middleware(request: NextRequest) {
             cookieStore.set('accessToken', parsed.accessToken, options);
           if (parsed.refreshToken)
             cookieStore.set('refreshToken', parsed.refreshToken, options);
+          if (parsed.sessionId)
+            cookieStore.set('sessionId', parsed.sessionId, options);
         }
         // Якщо сесія все ще активна:
         // для публічного маршруту — виконуємо редірект на головну.
         if (isPublicRoute) {
-          return NextResponse.redirect(
-            new URL('/', request.url)
-            // {
-            // headers: {
-            //   Cookie: cookieStore.toString(),
-            // },
-            // }
-          );
+          return NextResponse.redirect(new URL('/', request.url), {
+            headers: {
+              Cookie: cookieStore.toString(),
+            },
+          });
         }
         // для приватного маршруту — дозволяємо доступ
         if (isPrivateRoute) {
-          return NextResponse
-            .next
-            // {
-            // headers: {
-            //   Cookie: cookieStore.toString(),
-            // },
-            // }
-            ();
+          return NextResponse.next({
+            headers: {
+              Cookie: cookieStore.toString(),
+            },
+          });
         }
       }
     }
@@ -84,6 +80,7 @@ export async function middleware(request: NextRequest) {
   if (isPrivateRoute) {
     return NextResponse.next();
   }
+  return NextResponse.next();
 }
 
 export const config = {

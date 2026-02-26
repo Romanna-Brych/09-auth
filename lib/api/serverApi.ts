@@ -39,7 +39,7 @@ export async function checkSessionServer(): Promise<
   AxiosResponse<CheckSessionRequest>
 > {
   const cookieStore = await cookies();
-  const res = await nextServer.get<CheckSessionRequest>('/auth/refresh', {
+  const res = await nextServer.post<CheckSessionRequest>('/auth/refresh', {
     headers: {
       Cookie: cookieStore.toString(),
     },
