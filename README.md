@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NoteHub
 
-## Getting Started
+NoteHub is a web application for creating, organizing, and managing notes. It allows users to browse notes, filter them by category, view detailed information, and create their own notes through a convenient interface.
 
-First, run the development server:
+## Preview
+
+![NoteHub Preview](./public/preview.webp)
+
+## Live Demo
+
+[Live Demo](https://09-auth-eight-ebon.vercel.app/)
+
+## GitHub Repository
+
+[GitHub Repository](https://github.com/Romanna-Brych/NoteHub)
+
+## Features
+
+- Home page
+- Authentication (Sign In / Sign Up)
+- Protected (private) routes
+- Notes list with filtering
+- Dynamic routing for note details
+- Create new notes
+- Sidebar navigation (parallel routes)
+- User profile and edit page
+- Loading and error states handling
+
+## Tech Stack
+
+- Next.js
+- TypeScript
+- React
+- TanStack Query
+- Axios
+- Zustand
+- CSS Modules
+
+##Project Structure
+
+app/
+├── (auth routes)
+│   ├── sign-in
+│   └── sign-up
+│
+├── (private routes)
+│   ├── notes/
+│   │   ├── [id]
+│   │   ├── action/create
+│   │   ├── filter
+│   │   ├── […slug]
+│   │   ├── @sidebar
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   │
+│   ├── profile/
+│   │   └── edit
+│
+├── @modal
+├── api
+├── layout.tsx
+├── loading.tsx
+├── not-found.tsx
+└── page.tsx
+
+## Pages
+
+- `/` — Home page  
+- `/sign-in` — Login page  
+- `/sign-up` — Registration page  
+- `/notes` — Notes list  
+- `/notes/[id]` — Note details  
+- `/notes/action/create` — Create note  
+- `/profile` — User profile  
+- `/profile/edit` — Edit profile
+
+## Installation and Setup
+
+1. Clone the repository:
 
 ```bash
+git clone https://github.com/Romanna-Brych/NoteHub.git
+```
+2. Navigate to the project folder:
+```bash
+cd NoteHub
+```
+3. Install dependencies:
+```bash
+npm install
+```
+4. Create a .env.local file:
+```bash
+NEXT_PUBLIC_API_URL=your_api_url
+```
+5. Start the development server:
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+6. Open the app in your browser:
+```bash
+http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
