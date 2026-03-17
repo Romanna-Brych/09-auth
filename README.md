@@ -36,7 +36,7 @@ NoteHub is a web application for creating, organizing, and managing notes. It al
 - Zustand
 - CSS Modules
 
-##Project Structure
+## Project Structure
 
 app/
 ├── (auth routes)
